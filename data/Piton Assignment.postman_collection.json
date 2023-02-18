@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "6fd07c78-5be5-4c69-ba21-d2d918632455",
+		"name": "Piton Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11317760"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"\",\n    \"password\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/login",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"\",\n    \"name\":\"\",\n    \"password\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/register",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/categories",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products by CategoryId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/products/1",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/products/1",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Cover Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fileName\":\"dune.png\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/cover_image",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"cover_image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Like",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":2,\n    \"product_id\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/like",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product UnLike",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":2,\n    \"product_id\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://assign-api.piton.com.tr/api/rest/unlike",
+					"protocol": "https",
+					"host": [
+						"assign-api",
+						"piton",
+						"com",
+						"tr"
+					],
+					"path": [
+						"api",
+						"rest",
+						"unlike"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Authorization",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwczovL2hhc3VyYS5pby9qd3QvY2xhaW1zIjp7IngtaGFzdXJhLWFsbG93ZWQtcm9sZXMiOlsibW9iaWxlX3VzZXIiLCJhZG1pbl91c2VyIiwidXNlciJdLCJ4LWhhc3VyYS1kZWZhdWx0LXJvbGUiOiJ1c2VyIiwieC1oYXN1cmEtdXNlci1pZCI6IjIifSwiaWF0IjoxNjczMzQ2MjgzLCJleHAiOjE2NzU5MzgyODN9.PpUyscxIHM3OguyoQj7AlVAIFM1KOiB8SEpSG0mMIxM"
+		}
+	]
+}
