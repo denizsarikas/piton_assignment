@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setToken, setRememberMe } from '../../features/auth/authSlice';
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const Login = () => {
 
@@ -18,37 +20,54 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
-      e.preventDefault();
-      const userInfo = { email, password };
-      try {
-        const response = await axios.post('https://assign-api.piton.com.tr/api/rest/login', userInfo);
-        const  token  = response.data;
-        const tokenValue = token.action_login.token
+    e.preventDefault();
+    const userInfo = { email, password };
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const regEx2 = /^[a-z0-9]+$/i;
 
-        console.log('burası çok önemli', token.action_login.token)
+    if (regEx.test(email)) {
+      console.log("Email is Valid");
+    } else if (!regEx.test(email) && email !== "") {
+      toast.error("Email is Not Valid");
+      return
+    } else if (regEx2.test(password)) {
+      console.log("Password is Valid");
+    } else if (!regEx.test(password) && password !== "") {
+      toast.error("Password is Not Valid");
+      return
+    }else if (password.length < 6 | password.length > 20 ) {
+      toast.error("Your password must be at least 6, max 20 characters long");
+      return
+    } 
+    try {
+      const response = await axios.post('https://assign-api.piton.com.tr/api/rest/login', userInfo);
+      const token = response.data;
+      const tokenValue = token.action_login.token
 
-        if (checked === true && tokenValue !== '') {
-          console.log('check durumu tıklanarak true oldu!');
-          await dispatch(setToken(tokenValue));
-          await dispatch(setRememberMe(true));
-          localStorage.setItem('token', tokenValue);
-          console.log('localStorage\'a token kaydedildi!');
-          navigate("/");
-        }
-        else if (tokenValue !== '') {
-          console.log('Giriş işlemi başarılı:', response.data);
-          await dispatch(setToken(tokenValue));
-          navigate("/");
-        }
-      } catch (error) {
-        console.error('Giriş hatası:', error);
+      console.log('burası çok önemli', token.action_login.token)
+
+      if (checked === true && tokenValue !== '') {
+        console.log('check durumu tıklanarak true oldu!');
+        await dispatch(setToken(tokenValue));
+        await dispatch(setRememberMe(true));
+        localStorage.setItem('token', tokenValue);
+        console.log('localStorage\'a token kaydedildi!');
+        navigate("/");
       }
-    };
+      else if (tokenValue !== '') {
+        console.log('Giriş işlemi başarılı:', response.data);
+        await dispatch(setToken(tokenValue));
+        navigate("/");
+      }
+    } catch (error) {
+      console.error('Giriş hatası:', error);
+    }
+  };
 
-    //const tokenControl = useSelector(selectToken);
-    //console.log('Giriş işlemi detayları token:', tokenControl);
-    //console.log('checkbox stateteki durum: ', checked)
-    //console.log('checkbox reduxtan gelen durum: ', selectControl)
+  //const tokenControl = useSelector(selectToken);
+  //console.log('Giriş işlemi detayları token:', tokenControl);
+  //console.log('checkbox stateteki durum: ', checked)
+  //console.log('checkbox reduxtan gelen durum: ', selectControl)
 
 
 
@@ -59,7 +78,7 @@ const Login = () => {
           src={Background} alt='arkaplan' />
       </div>
 
-      
+
       <div className='flex-1 flex flex-col justify-center items-center'>
         <table>
           <tr>
@@ -105,9 +124,9 @@ const Login = () => {
             </div>
           </tr>
           <tr>
-            <button className='mb-2 flex flex-row justify-center items-center w-48 h-16 bg-[#EF6B4A] rounded text-white'  onClick={handleLogin}>Login</button>
+            <button className='mb-2 flex flex-row justify-center items-center w-48 h-16 bg-[#EF6B4A] rounded text-white' onClick={handleLogin}>Login</button>
             <Link to="/register">
-            <button className='flex-row justify-center items-center w-48 h-16 bg-white rounded-md text-indigo-600 border border-indigo-600'>Go to Register Page</button>
+              <button className='flex-row justify-center items-center w-48 h-16 bg-white rounded-md text-indigo-600 border border-indigo-600'>Go to Register Page</button>
             </Link>
           </tr>
 

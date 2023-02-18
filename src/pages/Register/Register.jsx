@@ -16,10 +16,23 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+
     const handleRegister = async (e) => {
         e.preventDefault();
         const userInfo = { name, email, password };
-        if (password.length < 6 | password.length > 20 ) {
+        const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+        const regEx2 = /^[a-z0-9]+$/i;
+        if (regEx.test(email)) {
+            console.log("Email is Valid");
+        } else if (!regEx.test(email) && email !== "") {
+            toast.error("Email is Not Valid");
+            return
+        }else if (regEx2.test(password)) {
+            console.log("Password is Valid");
+          } else if (!regEx.test(password) && password !== "") {
+            toast.error("Password is Not Valid");
+            return
+          }else if (password.length < 6 | password.length > 20 ) {
             toast.error("Your password must be at least 6, max 20 characters long");
             return
           }   
