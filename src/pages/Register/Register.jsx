@@ -22,28 +22,29 @@ const Register = () => {
         const userInfo = { name, email, password };
         const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
         const regEx2 = /^[a-z0-9]+$/i;
-        if (regEx.test(email)) {
-            console.log("Email is Valid");
-        } else if (!regEx.test(email) && email !== "") {
+        if (!regEx.test(email) && email !== "") {
             toast.error("Email is Not Valid");
             return
-        }else if (regEx2.test(password)) {
-            console.log("Password is Valid");
-          } else if (!regEx.test(password) && password !== "") {
+          }
+          else if (email === "") {
+            toast.error("Email is Not Valid");
+            return
+          }
+           else if (!regEx2.test(password) && password !== "") {
             toast.error("Password is Not Valid");
             return
           }else if (password.length < 6 | password.length > 20 ) {
             toast.error("Your password must be at least 6, max 20 characters long");
             return
-          }   
+          } 
         try {
-          const response = await axios.post('https://assign-api.piton.com.tr/api/rest/register', userInfo);
-          console.log('Kayıt işlemi başarılı:', response.data);
-          navigate("/login");
+            const response = await axios.post('https://assign-api.piton.com.tr/api/rest/register', userInfo);
+            console.log('Kayıt işlemi başarılı:', response.data);
+            navigate("/login");
         } catch (error) {
-          console.error('Kayıt hatası:', error);
+            console.error('Kayıt hatası:', error);
         }
-      };
+    };
 
 
     return (
@@ -107,7 +108,7 @@ const Register = () => {
                     </tr>
                     <tr>
                         <Link to="/login">
-                        <button className='mb-2 flex flex-row justify-center items-center w-48 h-16 bg-[#EF6B4A] rounded text-white'>Go to Login</button>
+                            <button className='mb-2 flex flex-row justify-center items-center w-48 h-16 bg-[#EF6B4A] rounded text-white'>Go to Login</button>
                         </Link>
                         <button className='flex-row justify-center items-center w-48 h-16 bg-white rounded-md text-indigo-600 border border-indigo-600' onClick={handleRegister}>Register</button>
                     </tr>

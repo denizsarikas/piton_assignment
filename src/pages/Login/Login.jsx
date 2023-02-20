@@ -24,15 +24,16 @@ const Login = () => {
     const userInfo = { email, password };
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     const regEx2 = /^[a-z0-9]+$/i;
-
-    if (regEx.test(email)) {
-      console.log("Email is Valid");
-    } else if (!regEx.test(email) && email !== "") {
+    
+    if (!regEx.test(email) && email !== "") {
       toast.error("Email is Not Valid");
       return
-    } else if (regEx2.test(password)) {
-      console.log("Password is Valid");
-    } else if (!regEx.test(password) && password !== "") {
+    }
+    else if (email === "") {
+      toast.error("Email is Not Valid");
+      return
+    }
+     else if (!regEx2.test(password) && password !== "") {
       toast.error("Password is Not Valid");
       return
     }else if (password.length < 6 | password.length > 20 ) {
@@ -115,7 +116,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className="flex items-center">
-                    <input onClick={console.log('deneme', checked)} checked={checked} onChange={(e) => setChecked(e.target.checked)} type="checkbox" id="remember" className="h-4 w-4 border-gray-300 rounded text-primary-color focus:ring-primary-color" />
+                    <input checked={checked} onChange={(e) => setChecked(e.target.checked)} type="checkbox" id="remember" className="h-4 w-4 border-gray-300 rounded text-primary-color focus:ring-primary-color" />
                     <label for="remember" className="ml-2 block text-sm font-medium text-[#6251DD]">Remember Me</label>
                   </div>
                 </label>
